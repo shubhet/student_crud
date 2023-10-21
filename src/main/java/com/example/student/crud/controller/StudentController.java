@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -51,6 +52,13 @@ public class StudentController {
 		Student student = studentService.getStudentById(studentId);
 	    studentService.deleteStudent(studentId);
 	    return new ResponseEntity<>(student, HttpStatus.OK);
+	}
+	
+	
+	@PutMapping("/upadteStuduent/{id}")
+	public ResponseEntity<Student> updateStudent(@RequestBody Student student, @PathVariable("id") Integer studentId){
+		Student updatedStudent = studentService.updateStudent(student,studentId);
+		return new ResponseEntity<>(updatedStudent,HttpStatus.OK);
 	}
 	
 	

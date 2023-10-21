@@ -40,5 +40,15 @@ public class StudentServiceImpl implements StudentService {
 		return studentList;
 	}
 
+	@Override
+	public Student updateStudent(Student student,Integer studentId) {
+		Student existingStudent = this.studentRepository.findById(studentId).orElseThrow();
+		existingStudent.setName(student.getName());
+		existingStudent.setEmail(student.getEmail());
+		existingStudent.setMobile(student.getMobile());
+		return studentRepository.save(existingStudent);
+		
+	}
+
 	
 }
