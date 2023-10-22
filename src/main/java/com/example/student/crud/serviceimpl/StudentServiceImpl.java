@@ -3,8 +3,10 @@ package com.example.student.crud.serviceimpl;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.context.config.ConfigDataResourceNotFoundException;
 import org.springframework.stereotype.Service;
 
+import com.example.student.crud.exception.ResourceNotFoundException;
 import com.example.student.crud.models.Student;
 import com.example.student.crud.repository.StudentRepository;
 import com.example.student.crud.service.StudentService;
@@ -22,15 +24,14 @@ public class StudentServiceImpl implements StudentService {
 
 	@Override
 	public Student getStudentById(Integer studentId) {
-		Student student = this.studentRepository.findById(studentId).orElseThrow();
+		Student student = this.studentRepository.findById(studentId).orElseThrow(()-> new ResourceNotFoundException("StudentId",studentId));
 		return studentRepository.getById(studentId);
 	}
 
 	@Override
-	public Student deleteStudent(Integer studentId) {
-		Student student = this.studentRepository.findById(studentId).orElseThrow();
+	public void deleteStudent(Integer studentId) {
+		Student student = this.studentRepository.findById(studentId).orElseThrow(()-> new ResourceNotFoundException("Student Id", studentId));
 		this.studentRepository.delete(student);
-		return student;
 		
 	}
 

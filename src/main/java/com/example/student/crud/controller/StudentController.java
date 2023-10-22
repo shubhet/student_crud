@@ -14,6 +14,8 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import com.example.student.crud.models.ApiResponse;
 import com.example.student.crud.models.Student;
 import com.example.student.crud.service.StudentService;
 
@@ -48,10 +50,10 @@ public class StudentController {
 	
 	
 	@DeleteMapping("/deleteStudentById/{id}")
-	public ResponseEntity<Student> deleteStudentById(@PathVariable("id") Integer studentId){
+	public ApiResponse deleteStudentById(@PathVariable("id") Integer studentId){
 		Student student = studentService.getStudentById(studentId);
 	    studentService.deleteStudent(studentId);
-	    return new ResponseEntity<>(student, HttpStatus.OK);
+	    return new ApiResponse("Student Deleted Successfully",true);
 	}
 	
 	
